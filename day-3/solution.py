@@ -27,7 +27,15 @@ def part1(input):
 
 
 def part2(input):
-    return
+    priorities = dict(zip(string.ascii_letters, range(1, 53)))
+    total = 0
+
+    for i in range(0, len(input), 3):
+        group = input[i : i + 3]
+        member0, member1, member2 = set(group[0]), set(group[1]), set(group[2])
+        badge = list(member0.intersection(member1).intersection(member2))[0]
+        total += priorities[badge]
+    return total
 
 
 def main():
