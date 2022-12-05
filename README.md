@@ -18,6 +18,7 @@ year to familiarize myself with it more.
 | 01  | [Calorie Counting](https://adventofcode.com/2022/day/1)        | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-1/solution.py) | ⭐⭐  |
 | 02  | [Rock Paper Scissors](https://adventofcode.com/2022/day/2)     | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-2/solution.py) | ⭐⭐  |
 | 03  | [Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-3/solution.py) | ⭐⭐  |
+| 03  | [Camp Cleanup](https://adventofcode.com/2022/day/4)            | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-4/solution.py) | ⭐⭐  |
 | 04  |                                                                |                                                                                                         |       |
 | 05  |                                                                |                                                                                                         |       |
 | 06  |                                                                |                                                                                                         |       |
