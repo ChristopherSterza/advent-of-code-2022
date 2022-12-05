@@ -19,7 +19,7 @@ year to familiarize myself with it more.
 | 02  | [Rock Paper Scissors](https://adventofcode.com/2022/day/2)     | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-2/solution.py) | ⭐⭐  |
 | 03  | [Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-3/solution.py) | ⭐⭐  |
 | 04  | [Camp Cleanup](https://adventofcode.com/2022/day/4)            | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-4/solution.py) | ⭐⭐  |
-| 05  |                                                                |                                                                                                         |       |
+| 05  | [Supply Stacks](https://adventofcode.com/2022/day/5)           | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-5/solution.py) | ⭐⭐  |
 | 06  |                                                                |                                                                                                         |       |
 | 07  |                                                                |                                                                                                         |       |
 | 08  |                                                                |                                                                                                         |       |
