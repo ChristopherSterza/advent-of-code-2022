@@ -20,7 +20,7 @@ year to familiarize myself with it more.
 | 03  | [Rucksack Reorganization](https://adventofcode.com/2022/day/3) | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-3/solution.py) | ⭐⭐  |
 | 04  | [Camp Cleanup](https://adventofcode.com/2022/day/4)            | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-4/solution.py) | ⭐⭐  |
 | 05  | [Supply Stacks](https://adventofcode.com/2022/day/5)           | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-5/solution.py) | ⭐⭐  |
-| 06  |                                                                |                                                                                                         |       |
+| 06  | [Tuning Trouble](https://adventofcode.com/2022/day/6)          | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-6/solution.py) | ⭐⭐  |
 | 07  |                                                                |                                                                                                         |       |
 | 08  |                                                                |                                                                                                         |       |
 | 09  |                                                                |                                                                                                         |       |
