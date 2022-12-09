@@ -22,7 +22,7 @@ year to familiarize myself with it more.
 | 05  | [Supply Stacks](https://adventofcode.com/2022/day/5)           | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-5/solution.py) | ⭐⭐  |
 | 06  | [Tuning Trouble](https://adventofcode.com/2022/day/6)          | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-6/solution.py) | ⭐⭐  |
 | 07  | [No Space Left On Device](https://adventofcode.com/2022/day/7) | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-7/solution.py) | ⭐⭐  |
-| 08  |                                                                |                                                                                                         |       |
+| 08  | [Treetop Tree House](https://adventofcode.com/2022/day/8)      | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-8/solution.py) | ⭐⭐  |
 | 09  |                                                                |                                                                                                         |       |
 | 10  |                                                                |                                                                                                         |       |
 | 11  |                                                                |                                                                                                         |       |
