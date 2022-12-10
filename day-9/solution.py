@@ -1,54 +1,68 @@
 from pathlib import Path
+from operator import sub
 
 
-def getInput(path):
+def getInput(path: str) -> list[str]:
     input = Path(path).read_text().splitlines()
     return input
 
 
-def part1(input):
+def clamp(list: list, min_val: int, max_val: int):
+    for i, el in enumerate(list):
+        list[i] = max(min(el, max_val), min_val)
+
+
+def step(rope: list[list[int, int]], direction: str) -> None:
+    # Move head
+    match direction:
+        case "U":
+            rope[0][0] += 1
+        case "D":
+            rope[0][0] -= 1
+        case "L":
+            rope[0][1] -= 1
+        case "R":
+            rope[0][1] += 1
+    # Check if rest of rope segments need moving
+    for segment in range(1, len(rope)):
+        prev_seg = rope[segment - 1]
+        # Get the distance from the previous rope segment
+        distance = list(map(sub, prev_seg, rope[segment]))
+        # Check if previous segment is too far
+        if abs(distance[0]) >= 2 or abs(distance[1]) >= 2:
+            # Clamp to get distance to move rope segment
+            clamp(distance, -1, 1)
+            rope[segment][0] += distance[0]
+            rope[segment][1] += distance[1]
+        else:
+            break
+
+
+def part1(input: list[str]) -> str:
     visited = set()
-    ptr_head, ptr_tail = [0, 0], [0, 0]
+    rope = [[0, 0], [0, 0]]
 
     for instr in input:
-        # print(instr)
-        match instr.split():
-            case ["U", qty]:
-                for step in range(int(qty)):
-                    ptr_head[0] += 1
-                    if ptr_tail[0] + 1 < ptr_head[0]:
-                        ptr_tail[0] += 1
-                        ptr_tail[1] = ptr_head[1]
-                    visited.add(tuple(ptr_tail))
-            case ["D", qty]:
-                for step in range(int(qty)):
-                    ptr_head[0] -= 1
-                    if ptr_tail[0] - 1 > ptr_head[0]:
-                        ptr_tail[0] -= 1
-                        ptr_tail[1] = ptr_head[1]
-                    visited.add(tuple(ptr_tail))
-            case ["L", qty]:
-                for step in range(int(qty)):
-                    ptr_head[1] -= 1
-                    if ptr_tail[1] - 1 > ptr_head[1]:
-                        ptr_tail[1] -= 1
-                        ptr_tail[0] = ptr_head[0]
-                    visited.add(tuple(ptr_tail))
-            case ["R", qty]:
-                for step in range(int(qty)):
-                    ptr_head[1] += 1
-                    if ptr_tail[1] + 1 < ptr_head[1]:
-                        ptr_tail[1] += 1
-                        ptr_tail[0] = ptr_head[0]
-                    visited.add(tuple(ptr_tail))
-            case _:
-                continue
+        direction, steps = instr.split()
+        for i in range(int(steps)):
+            step(rope, direction)
+            visited.add(tuple(rope[-1]))
 
-    return len(visited)
+    return str(len(visited))
 
 
-def part2(input):
-    return
+def part2(input: list[str]) -> str:
+    visited = set()
+    rope_segments = 10
+    rope = [[0, 0] for i in range(rope_segments)]
+
+    for instr in input:
+        direction, steps = instr.split()
+        for i in range(int(steps)):
+            step(rope, direction)
+            visited.add(tuple(rope[-1]))
+
+    return str(len(visited))
 
 
 def main():
