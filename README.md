@@ -27,7 +27,7 @@ year to familiarize myself with it more.
 | 10  | [Cathode-Ray Tube](https://adventofcode.com/2022/day/10)        | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-10/solution.py) | ⭐⭐  |
 | 11  | [Monkey in the Middle](https://adventofcode.com/2022/day/11)    | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-11/solution.py) | ⭐⭐  |
 | 12  | [Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-12/solution.py) | ⭐⭐  |
-| 13  |                                                                 |                                                                                                          |       |
+| 13  | [Distress Signal](https://adventofcode.com/2022/day/13)         | [🐍solution.py](https://github.com/ChristopherSterza/advent-of-code-2022/blob/master/day-13/solution.py) | ⭐⭐  |
 | 14  |                                                                 |                                                                                                          |       |
 | 15  |                                                                 |                                                                                                          |       |
 | 16  |                                                                 |                                                                                                          |       |
