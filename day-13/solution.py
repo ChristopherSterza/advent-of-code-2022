@@ -1,4 +1,5 @@
 from pathlib import Path
+from functools import cmp_to_key
 
 
 def getInput(path: str) -> list[str]:
@@ -34,31 +35,12 @@ def compare(left, right) -> int:
     return 0  # Lists are identical
 
 
-def quick_sort(input: list[str], low: int, high: int):
-    if low < high:
-        part_idx = partition(input, low, high)
-        quick_sort(input, low, part_idx - 1)
-        quick_sort(input, part_idx + 1, high)
-    return
-
-
-def partition(input: list[str], low: int, high: int) -> int:
-    pivot = input[high]
-    i = low - 1
-
-    for j in range(low, high + 1):
-        if compare(eval(input[j]), eval(pivot)) < 0:
-            i += 1
-            input[i], input[j] = input[j], input[i]
-    input[i + 1], input[high] = input[high], input[i + 1]
-    return i + 1
-
-
 def part1(input: list[str]) -> str:
+    input = list(map(eval, input))
     pairs = [input[i : i + 2] for i in range(0, len(input), 2)]
     total = 0
     for idx, pair in enumerate(pairs, 1):
-        result = compare(eval(pair[0]), eval(pair[1]))
+        result = compare(pair[0], pair[1])
         if result <= 0:
             total += idx
 
@@ -66,10 +48,11 @@ def part1(input: list[str]) -> str:
 
 
 def part2(input: list[str]) -> str:
-    input = ["[[2]]", "[[6]]"] + input
-    quick_sort(input, 0, len(input) - 1)
-    idx2, idx6 = input.index("[[2]]") + 1, input.index("[[6]]") + 1
-    return str(idx2 * idx6)
+    input = list(map(eval, input))
+    input.extend([[[2]], [[6]]])
+    input = sorted(input, key=cmp_to_key(compare))
+    idx1, idx2 = input.index([[2]]) + 1, input.index([[6]]) + 1
+    return str(idx1 * idx2)
 
 
 def main():
