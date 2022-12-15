@@ -1,5 +1,13 @@
 from pathlib import Path
-from string import ascii_lowercase
+
+
+class Node:
+    def __init__(self, row=-1, col=-1, height=-1, parent=None) -> None:
+        self.row = row
+        self.col = col
+        self.height = height
+        self.parent = parent
+        self.visited = False
 
 
 def getInput(path: str) -> list[str]:
@@ -7,122 +15,74 @@ def getInput(path: str) -> list[str]:
     return input
 
 
-def find_S_and_E(terrain: dict, rows: int, cols: int) -> list[tuple()]:
-    start = end = (-1, -1)
-    for row in range(rows):
-        for col in range(cols):
-            if terrain[(row, col)] == "S":
-                start = (row, col)
-            if terrain[(row, col)] == "E":
-                end = (row, col)
-    return [start, end]
-
-
-def init_visited_dict(rows: int, cols: int) -> dict:
-    visited = {}
-    for i in range(rows):
-        for j in range(cols):
-            visited[(i, j)] = False
-    return visited
-
-
-def init_terrain_dict(input: list[str]) -> dict:
-    terrain = {}
+def init_grid(input: list[list[str]]):
+    rows, cols = len(input), len(input[0])
+    grid = [[Node for col in range(cols)] for row in range(rows)]
     for row, line in enumerate(input):
         for col, char in enumerate(line):
-            terrain[(row, col)] = char
-    return terrain
+            grid[row][col] = Node(row, col, ord(char))
+            if ord(char) == ord("S"):
+                start = grid[row][col]
+                start.height = ord("a")
+            if ord(char) == ord("E"):
+                end = grid[row][col]
+                end.height = ord("z")
+    return {"grid": grid, "start": start, "end": end}
 
 
-def BFS(
-    terrain: dict,
-    visited: dict,
-    parent: dict,
-    start: tuple,
-    reversed: bool,
-    rows: int,
-    cols: int,
-):
-    height = dict(zip(ascii_lowercase, range(1, 27)))
-    height["S"], height["E"] = 1, 26
-    queue = [start]
-    visited[start] = True
-    parent[start] = None
-
-    while queue:
-        pos = queue.pop(0)
-        adj = [
-            (pos[0] - 1, pos[1]),  # Up
-            (pos[0] + 1, pos[1]),  # Down
-            (pos[0], pos[1] - 1),  # Left
-            (pos[0], pos[1] + 1),  # Right
-        ]
-        # Within row bounds
-        adj = list(filter(lambda route: 0 <= route[0] < rows, adj))
-        # Within col bounds
-        adj = list(filter(lambda route: 0 <= route[1] < cols, adj))
-        # Not already visited
-        adj = list(filter(lambda route: not visited[route], adj))
-        # Within height bounds
-        if reversed:
-            adj = list(
-                filter(
-                    lambda route: height[terrain[route]] >= height[terrain[pos]] - 1,
-                    adj,
-                )
-            )
-        else:
-            adj = list(
-                filter(
-                    lambda route: height[terrain[route]] <= height[terrain[pos]] + 1,
-                    adj,
-                )
-            )
-        for route in adj:
-            queue.append(route)
-            visited[route] = True
-            parent[route] = pos
-
-    return
-
-
-def find_path(parent: dict, destination: tuple) -> list[tuple]:
+def get_path(destination: Node) -> list[Node]:
     path = [destination]
-    pos = parent[destination]
-    while pos != None:
-        path = [pos] + path
-        pos = parent[pos]
+    curr_node = destination
+    while curr_node.parent != None:
+        path = [curr_node.parent] + path
+        curr_node = curr_node.parent
     return path
 
 
-def part1(input: list[str]) -> str:
-    rows, cols = len(input), len(input[0])
-    terrain = init_terrain_dict(input)
-    visited = init_visited_dict(rows, cols)
-    start, end = find_S_and_E(terrain, rows, cols)
-    parent = {}
+# Rearranges all the nodes into a BFS parent-tree
+def BFS(reversed: bool, source: Node, grid: list[list[Node]]):
+    source.parent = None
+    queue = [source]
+    source.visited = True
+    rows, cols = len(grid), len(grid[0])
 
-    BFS(terrain, visited, parent, start, False, rows, cols)
-    path = find_path(parent, end)
-    return str(len(path) - 1)
+    while queue:
+        node = queue.pop(0)
+        for dx, dy in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+            x, y = node.row + dx, node.col + dy
+            if x < 0 or x >= rows or y < 0 or y >= cols:  # Check grid bounds
+                continue
+            if reversed and grid[x][y].height < node.height - 1:  # Check height
+                continue
+            elif not reversed and grid[x][y].height > node.height + 1:
+                continue
+            next_node = grid[x][y]
+            if next_node.visited:  # Check if node was already visited
+                continue
+            next_node.parent = node
+            queue.append(next_node)
+            next_node.visited = True
+
+
+def part1(input: list[str]) -> str:
+    values = init_grid(input)
+    grid, start, end = values["grid"], values["start"], values["end"]
+
+    BFS(reversed=False, source=start, grid=grid)
+    return str(len(get_path(destination=end)) - 1)
 
 
 def part2(input: list[str]) -> str:
-    rows, cols = len(input), len(input[0])
-    terrain = init_terrain_dict(input)
-    visited = init_visited_dict(rows, cols)
-    start, end = find_S_and_E(terrain, rows, cols)
-    parent = {}
+    values = init_grid(input)
+    grid, end = values["grid"], values["end"]
+    rows, cols = len(grid), len(grid[0])
 
-    # Get parents for all "a's" connected to the end
-    BFS(terrain, visited, parent, end, True, rows, cols)
-    shortest = rows * cols  # All paths shorter than visiting each cell
-    for row in range(rows):
-        for col in range(cols):
-            if terrain[(row, col)] in ["S", "a"] and (row, col) in parent:
-                path = find_path(parent, (row, col))
-                shortest = min(shortest, len(find_path(parent, (row, col))) - 1)
-
+    BFS(reversed=True, source=end, grid=grid)
+    shortest = rows * cols  # All paths shorter than visiting each node
+    for row in grid:
+        for node in row:
+            if node.visited and node.height == ord("a"):
+                shortest = min(shortest, len(get_path(node)) - 1)
     return str(shortest)
 
 
