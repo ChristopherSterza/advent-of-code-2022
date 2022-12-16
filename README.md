@@ -28,7 +28,7 @@ year to familiarize myself with it more.
 | 11  | [Monkey in the Middle](https://adventofcode.com/2022/day/11)    | [🐍solution.py](./day-11/solution.py) |                                    | ⭐⭐  |
 | 12  | [Hill Climbing Algorithm](https://adventofcode.com/2022/day/12) | [🐍solution.py](./day-12/solution.py) |                                    | ⭐⭐  |
 | 13  | [Distress Signal](https://adventofcode.com/2022/day/13)         | [🐍solution.py](./day-13/solution.py) | [Learnings](./day-13/learnings.md) | ⭐⭐  |
-| 14  |                                                                 |                                       |                                    |       |
+| 14  | [Regolith Reservoir](https://adventofcode.com/2022/day/14)      | [🐍solution.py](./day-14/solution.py) | [Learnings](./day-14/learnings.md) | ⭐⭐  |
 | 15  |                                                                 |                                       |                                    |       |
 | 16  |                                                                 |                                       |                                    |       |
 | 17  |                                                                 |                                       |                                    |       |

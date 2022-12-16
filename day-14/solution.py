@@ -46,11 +46,10 @@ def parse_walls(input: list[str]) -> dict:
     return occupied
 
 
-def fill_sand(occupied: dict):
+def fill_sand1(occupied: dict):
     y_max = list(occupied)[0][1]
     for point in occupied:
         y_max = max(y_max, point[1])
-    print(y_max)
     source = (500, 0)
     done = False
     while not done:
@@ -76,11 +75,36 @@ def fill_sand(occupied: dict):
     return
 
 
+def fill_sand2(occupied: dict):
+    y_max = list(occupied)[0][1]
+    for point in occupied:
+        y_max = max(y_max, point[1])
+    source = (500, 0)
+    while source not in occupied:
+        grain = Point(source[0], source[1], ".")
+        settled = False
+        while not settled:
+            settled = True
+            if grain.y + 1 == y_max + 2:
+                settled = True
+            elif (grain.x, grain.y + 1) not in occupied:
+                grain.y += 1
+                settled = False
+            elif (grain.x - 1, grain.y + 1) not in occupied:
+                grain.x -= 1
+                grain.y += 1
+                settled = False
+            elif (grain.x + 1, grain.y + 1) not in occupied:
+                grain.x += 1
+                grain.y += 1
+                settled = False
+        occupied[(grain.x, grain.y)] = grain
+    return
+
+
 def part1(input: list[str]) -> str:
     occupied = parse_walls(input)
-    print_scene(occupied)
-    fill_sand(occupied)
-    print_scene(occupied)
+    fill_sand1(occupied)
     count = 0
     for point in occupied:
         if occupied[point].content == ".":
@@ -89,7 +113,13 @@ def part1(input: list[str]) -> str:
 
 
 def part2(input: list[str]) -> str:
-    return
+    occupied = parse_walls(input)
+    fill_sand2(occupied)
+    count = 0
+    for point in occupied:
+        if occupied[point].content == ".":
+            count += 1
+    return count
 
 
 def main():
